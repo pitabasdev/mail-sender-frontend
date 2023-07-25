@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Alert from 'react-bootstrap/Alert';
+import BG from './Gmail_icon_(2020).svg'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
@@ -7,19 +8,19 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 export default function Mail() {
     const [email, setEmail] = useState('')
     const [subject, setSubject] = useState('');
-    const[message,setMessage]=useState('')
+    const [message, setMessage] = useState('')
     const [show, setShow] = useState(false);
     console.log(email, subject);
 
     const submit = async (e) => {
         e.preventDefault();
-        const res=await fetch('http://localhost:5000/mail',{
-            method:"POST",
-            headers:{
-                "Content-type":"application/json"
+        const res = await fetch('http://localhost:5000/mail', {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
             },
-            body:JSON.stringify({
-                email,subject,message
+            body: JSON.stringify({
+                email, subject, message
 
             })
         })
@@ -39,11 +40,12 @@ export default function Mail() {
         <div>
             {
                 show ? <Alert variant="primary" onClose={() => setShow(false)} dismissible>
-                    Your Email Succesfully Send
+                    Your Email Successfully Send
                 </Alert> : ""
             }
             <div className='d-flex justify-content-center mt-3'>
-                <h2>Send Mail to your Friend😁</h2>
+                <h2>Send Mail to your Friend</h2>
+                <img className='ml-2' style={{ width: "50px", marginLeft: "9px" }} src={BG} alt=""></img>
             </div>
             <div className='d-flex justify-content-center mt-3 '>
                 <Form className='mt-2 col-lg-4'>
@@ -55,7 +57,6 @@ export default function Mail() {
                         <Form.Label>Title of the Message means Subject</Form.Label>
                         <Form.Control onChange={(e) => setSubject(e.target.value)} type="text" placeholder="Enter Subject" />
                     </Form.Group>
-
                     <FloatingLabel
                         controlId="floatingTextarea"
                         label="Enter Your Message....."
